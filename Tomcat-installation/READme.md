@@ -46,3 +46,29 @@ starttomcat
 sudo su - ec2-user
 ```
 
+Alternatively use this my pattern (vi a bash script and paste inside eg vi.tomcat)
+run sudo yum update -y before creating the bash code
+
+#!/bin/bash
+cd /opt 
+sudo yum install git wget -y
+sudo yum install java-1.8.0-openjdk-devel -y
+# install wget unzip packages.
+sudo yum install wget unzip -y
+
+sudo wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz
+sudo tar -xvf apache-tomcat-9.0.71.tar.gz
+sudo rm -rf apache-tomcat-9.0.71.tar.gz
+### rename tomcat for good naming convention
+sudo mv apache-tomcat-9.0.71 tomcat9
+### assign executable permissions to the tomcat home directory
+sudo chmod 777 -R /opt/tomcat9
+sudo chown ec2-user -R /opt/tomcat9
+### start tomcat
+sh /opt/tomcat9/bin/startup.sh
+# create a soft link to start and stop tomcat
+# This will enable us to manage tomcat as a service
+sudo ln -s /opt/tomcat9/bin/startup.sh /usr/bin/starttomcat
+sudo ln -s /opt/tomcat9/bin/shutdown.sh /usr/bin/stoptomcat
+starttomcat
+sudo su - ec2-user
