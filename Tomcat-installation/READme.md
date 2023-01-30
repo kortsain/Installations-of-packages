@@ -46,9 +46,9 @@ starttomcat
 sudo su - ec2-user
 ```
 
-Alternatively use this my pattern (vi a bash script and paste inside eg vi.tomcat)
+## Alternatively use this my pattern (vi a bash script and paste inside eg vi.tomcat)
 run sudo yum update -y before creating the bash code
-
+``` sh
 #!/bin/bash
 cd /opt 
 sudo yum install git wget -y
@@ -72,3 +72,4 @@ sudo ln -s /opt/tomcat9/bin/startup.sh /usr/bin/starttomcat
 sudo ln -s /opt/tomcat9/bin/shutdown.sh /usr/bin/stoptomcat
 starttomcat
 sudo su - ec2-user
+```
